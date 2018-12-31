@@ -1,0 +1,157 @@
+<!-- 
+
+    1.第一屏
+        1.1 先给第一屏两个个背景图片，先写product的背景图片，它的位置是center center,第二个图给大背景图片，位置是水平居中，垂直到bottom
+
+        1.2 给第一屏里加2个img，一个放沙发， 一个放气球
+
+        1.3 给沙发做定位，left:50%（因为要参照背景，背景是水平居中的），然后再往左偏移-160px;给沙发bottom一个固定的值320px
+
+        1.4 给气球做定位，left:50%，再往右偏移130px;    bottom:480px;
+
+        1.5 写一个动画剧本，剧本里就是往上偏移80像素（用translate）
+
+        1.6 给沙发和气球应用这个动画剧本，沙发的持续时间短一点（跳的快），气球的时间长一点（跳的慢）
+
+    
+    2.第二屏
+        2.1 先给第二屏加背景图片，背景图片只有一张，水平居中，垂直为bottom
+        2.2 给第二屏里加一个img，img放search01图片，给它做一个定位，用left:50%
+            并且margin-left:30%;这样它就跑到右边去了，然后再加一个bottom固定值300（因为背景也是固定的）
+
+        2.3 给第二屏里加一个img,放serach02图片，用left:50%和margin-left为 -111px;（宽度的一半，然后就能居中了），bottom固定值300,并且它默认要隐藏（display:none）
+
+        2.4 给第二屏里加一个img放沙发（因为要整体放大所以用img）,沙发用right:50%;和margin-right: -220.5px;（就能水平居中）和bottom: 210px;，为什么用right和bottom呢？因为放大时要保持右下不变
+
+        2.5 在JS里判断滚出来的是不是第二屏，如果是，则给$('.section2 .search01')加animate,改掉它的marginLeft，改为-111,然后在动画的回调函数里，把search01隐藏，search02显示出来，然后给search02加一个往右上走并缩小的动画（记得延迟500毫秒再做这个动画），并同时用animate把沙发放大到自己的原本宽度
+
+    
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- 1.导入文件 -->
+    <link rel="stylesheet" href="css/jquery.fullpage.min.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery.fullpage.min.js"></script>
+
+    <!-- Jquery.UI包括了easing和其他额外的一些东西，那么如果我只要用easing，没必要全导入jquery.ul。只导入easing就行了 -->
+    <script src="js/jquery.easing.1.3.js"></script>
+
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body>
+    <!-- 2.准备html -->
+    <div id="itcast">
+
+        <div class="section section1">
+            <img class="sofa" src="images/01/sofa.png" alt="">
+            <img class="ball" src="images/01/ball.png" alt="">
+        </div>
+
+        <div class="section section2">
+            <img class="search01" src="images/02/search01.png" alt="">
+            <img class="search02" src="images/02/search02.png" alt="">
+            <img class="sofas" src="images/02/sofas.png" alt="">
+        </div>
+
+        <!-- 第三屏 -->
+        <div class="section section3">
+            <img class="sofa" src="images/03/sofa.png" alt="">
+            <div class="color"></div>
+            <div class="add"></div>
+        </div>
+
+        <!-- 第四屏 -->
+        <div class="section section4 ">
+            <img  class="cloud" src="images/04/cloud.png" alt="">
+
+            <img class="words" src="images/04/words02.png" alt="">
+
+            <!-- 键盘和地址 -->
+            <div class="keyboard">
+                <img class="address" src="images/04/address.png" alt="">
+            </div>
+
+            <!-- 购物车 -->
+            <div class="carBox"></div>
+        </div>
+
+        <!-- 第五屏 -->
+        <div class="section section5">
+
+            <!-- 信用卡盒子 -->
+            <div class="cardBox">
+                <img class="bill" src="images/05/bill.png" alt="">
+                <img class="card" src="images/05/card.png" alt="">
+            </div>
+
+            <!-- 鼠标盒子 -->
+            <div class="mouse"></div>
+            <!-- 手 -->
+            <img class="hand" src="images/05/hand.png" alt="">
+            
+            <img class="words" src="images/05/words.png" alt="">
+        </div>
+
+        <div class="section section6">
+
+            <!-- 街道盒子 -->
+            <div class="street">
+
+                <!-- 门 -->
+                <img class="door" src="images/06/door.png" alt="">
+
+                <!-- 小女孩 -->
+                <img class="girl" src="images/06/girl.png" alt="">
+
+
+                <!-- 车盒子 -->
+                <div class="carBox">
+
+                    <div class="box">
+                        <img  class="sofa" src="images/04/sofa.png" alt="">
+                        <img src="images/06/box.png" alt="">
+                    </div>
+
+                    <!-- 快递员 -->
+                    <img class="man" src="images/06/man.png" alt="">
+
+                    <!-- 车 -->
+                    <img class="car" src="images/06/car.png" alt="">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- 第七屏 -->
+        <div class="section section7 ">
+            <div class="star"></div>
+            <img class="good" src="images/07/good.png" alt="">
+        </div>
+
+        <!-- 第八屏 -->
+        <div class="section section8">
+
+            <div class="begin"></div>
+
+            <img class="again" src="images/08/again.png" alt="">
+
+            <img class="hand" src="images/08/hand.png" alt="">
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script src="js/index.js"></script>
